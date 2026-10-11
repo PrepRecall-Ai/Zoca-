@@ -125,6 +125,47 @@
             color: var(--primary-green);
         }
 
+        /* Explore Gallery */
+        .explore-scroll {
+            display: flex;
+            overflow-x: auto;
+            gap: 15px;
+            padding: 10px 0 20px 0;
+            scrollbar-width: none; /* Hide scrollbar Firefox */
+        }
+        
+        .explore-scroll::-webkit-scrollbar { 
+            display: none; /* Hide scrollbar Chrome/Safari */
+        }
+
+        .explore-card {
+            min-width: 280px;
+            height: 350px;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            position: relative;
+            flex-shrink: 0;
+        }
+
+        .explore-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .explore-label {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0,0,0,0.8));
+            color: white;
+            padding: 20px 15px 10px 15px;
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+
         /* Smart Matcher Styles */
         .matcher-card {
             background: var(--white);
@@ -306,6 +347,33 @@
         <p>Premium dining, signature mocktails, and an unforgettable lounge experience in the heart of Lalpur, Ranchi.</p>
         <a href="#menu" class="btn-solid">View Our Menu</a>
     </header>
+
+<!-- Explore ZOCA Section -->
+    <section class="section" style="padding-bottom: 20px;">
+        <h2 class="section-title" style="margin-bottom: 20px; text-align: left;">Explore ZOCA</h2>
+        <div class="explore-scroll">
+            <div class="explore-card">
+                <img src="./explore1.jpg" alt="Artistic Dining">
+                <div class="explore-label">Artistic Dining Spaces</div>
+            </div>
+            <div class="explore-card">
+                <img src="./explore2.jpg" alt="Private Events">
+                <div class="explore-label">Private Events & Birthdays</div>
+            </div>
+            <div class="explore-card">
+                <img src="./explore3.jpg" alt="Continental Feasts">
+                <div class="explore-label">Continental Feasts</div>
+            </div>
+            <div class="explore-card">
+                <img src="./explore4.jpg" alt="Paint & Chill">
+                <div class="explore-label">Paint & Chill Afternoons</div>
+            </div>
+            <div class="explore-card">
+                <img src="./explore5.jpg" alt="Live Music">
+                <div class="explore-label">Live Music Weekends</div>
+            </div>
+        </div>
+    </section>
 
     <!-- Feature Cards -->
     <section class="section">
