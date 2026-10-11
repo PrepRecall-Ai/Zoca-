@@ -58,10 +58,12 @@
 
         /* Hero Section */
         .hero {
-            background: linear-gradient(rgba(74, 96, 43, 0.8), rgba(74, 96, 43, 0.9)), url('https://images.unsplash.com/photo-1514933651103-005eec06c04b?auto=format&fit=crop&w=1200&q=80') center/cover;
+            /* Using the uploaded ZOCA interior photo */
+            background: linear-gradient(rgba(44, 53, 34, 0.7), rgba(44, 53, 34, 0.8)), url('1000281898.jpg') center/cover;
             color: var(--white);
             text-align: center;
-            padding: 100px 20px;
+            padding: 120px 20px;
+            box-shadow: inset 0 -10px 20px rgba(0,0,0,0.1);
         }
 
         .hero h2 {
@@ -370,13 +372,14 @@
     <section id="menu" class="section">
         <h2 class="section-title">Our Full Menu</h2>
         
-        <!-- Category Filter Pills -->
+       <!-- Category Filter Pills -->
         <div class="pill-group" style="justify-content: center; margin-bottom: 30px;" id="menu-filters">
             <button class="pill active" onclick="filterMenu('All')">All</button>
             <button class="pill" onclick="filterMenu('Starters')">Starters</button>
-            <button class="pill" onclick="filterMenu('Pizza & Pasta')">Pizza & Pasta</button>
             <button class="pill" onclick="filterMenu('Main Course')">Main Course</button>
-            <button class="pill" onclick="filterMenu('Beverages')">Beverages</button>
+            <button class="pill" onclick="filterMenu('Pizza')">Pizza</button>
+            <button class="pill" onclick="filterMenu('Rice & Noodles')">Rice & Noodles</button>
+            <button class="pill" onclick="filterMenu('Bar & Beverages')">Bar & Beverages</button>
         </div>
 
         <!-- Menu Grid -->
@@ -495,21 +498,39 @@
         /* -----------------------------------------
            2. FULL MENU GENERATOR LOGIC
         ----------------------------------------- */
-        const fullMenuData = [
-            { name: "Mezze Platter", price: "₹621", desc: "Assortment of Middle Eastern dips, served with pita bread.", category: "Starters", img: "https://images.unsplash.com/photo-1541529086526-db283c563270?w=500&q=80" },
-            { name: "Butter Garlic Prawn", price: "₹707.25", desc: "Juicy prawns cooked in a rich butter garlic sauce.", category: "Starters", img: "https://images.unsplash.com/photo-1559742811-822873691df8?w=500&q=80" },
-            { name: "Chicken 65", price: "₹529", desc: "Bite-sized chicken marinated in spices and deep-fried.", category: "Starters", img: "https://images.unsplash.com/photo-1562967914-608f82629710?w=500&q=80" },
-            { name: "Steamed Momos", price: "₹285", desc: "Freshly steamed dumplings served with fiery chili garlic dip.", category: "Starters", img: "https://images.unsplash.com/photo-1496116218417-1a781b1c416c?w=500&q=80" },
+const fullMenuData = [
+            // STARTERS
+            { name: "Zoca Chicken 65", price: "₹370", desc: "Chicken appetizer made by deep frying marinated chicken with curry leaves.", category: "Starters", img: "https://images.unsplash.com/photo-1562967914-608f82629710?w=500&q=80" },
+            { name: "Awadh Ka Paneer", price: "₹345", desc: "Cottage cheese stuffed with ginger, green chilli, and dry fruits cooked in clay oven.", category: "Starters", img: "https://images.unsplash.com/photo-1541529086526-db283c563270?w=500&q=80" },
+            { name: "Butter Garlic Prawn", price: "₹495", desc: "Wok tossed button mushroom with butter, garlic, chilli, soy & oriental spices.", category: "Starters", img: "https://images.unsplash.com/photo-1559742811-822873691df8?w=500&q=80" },
+            { name: "Crispy Corn Salt & Pepper", price: "₹295", desc: "Deep-fried crunchy sweet corn kernels coated with cornflour & tossed in spices.", category: "Starters", img: "https://images.unsplash.com/photo-1626776876729-bab4369a5a5a?w=500&q=80" },
+            { name: "Tandoori Fish Tikka", price: "₹450", desc: "Boneless fish marinated in a red marinade, cooked in clay oven.", category: "Starters", img: "https://images.unsplash.com/photo-1599487405270-8950f1f1d13f?w=500&q=80" },
+            { name: "Keema Pudhine Ke Seekh", price: "₹380", desc: "Minced lamb with Indian spices skewered & cooked in clay oven.", category: "Starters", img: "https://images.unsplash.com/photo-1603360946369-dc9bb6258143?w=500&q=80" },
+            { name: "Steamed Veg Momos", price: "₹230", desc: "Vegetable dumplings steamed to perfection.", category: "Starters", img: "https://images.unsplash.com/photo-1496116218417-1a781b1c416c?w=500&q=80" },
+
+            // MAIN COURSE
+            { name: "Classic Butter Chicken", price: "₹390", desc: "Grilled chicken cooked in a juicy buttery tomato-based sauce.", category: "Main Course", img: "https://images.unsplash.com/photo-1604908176997-125f25cc6f3d?w=500&q=80" },
+            { name: "Zoca Shaam Savera Kofta", price: "₹320", desc: "Spinach kofta with soft cottage cheese in center, served with tangy tomato gravy.", category: "Main Course", img: "https://images.unsplash.com/photo-1585937421612-70a008356fbe?w=500&q=80" },
+            { name: "Mutton Rogan Josh", price: "₹495", desc: "Mutton braised with a flavored gravy using the slow cooking technique.", category: "Main Course", img: "https://images.unsplash.com/photo-1544025162-81134b2210a4?w=500&q=80" },
+            { name: "Dal Makhni", price: "₹295", desc: "Slow simmered creamy black lentil made with generous doses of butter.", category: "Main Course", img: "https://images.unsplash.com/photo-1546833999-b9f581a1996d?w=500&q=80" },
+            { name: "Bengali Fish Curry", price: "₹380", desc: "Features a light and fragrant coconut sauce with mustard seed gravy.", category: "Main Course", img: "https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?w=500&q=80" },
+            { name: "Paneer Butter Masala", price: "₹345", desc: "Cottage cheese cooked in buttery rich chunky tomato gravy.", category: "Main Course", img: "https://images.unsplash.com/photo-1565557623262-b51c2513a641?w=500&q=80" },
+
+            // PIZZA
+            { name: "Classic Margherita Pizza", price: "₹370", desc: "Napolitana pizza topped with rustic flavours of tomatoes, mozzarella cheese & basil.", category: "Pizza", img: "https://images.unsplash.com/photo-1574071318508-1cdbab80d002?w=500&q=80" },
+            { name: "Tandoori Chicken Tikka Pizza", price: "₹430", desc: "Pizza topped with clay oven roasted chicken morsels, onions, coriander & chilli.", category: "Pizza", img: "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=500&q=80" },
+            { name: "Smoke Chicken Salami Pizza", price: "₹450", desc: "Pizza topped with smoke chicken & salami button with cheese & seasoning.", category: "Pizza", img: "https://images.unsplash.com/photo-1628840042765-356cda07504e?w=500&q=80" },
             
-            { name: "Classic Margherita Pizza", price: "₹460", desc: "10-inch classic cheese and tomato pizza.", category: "Pizza & Pasta", img: "https://images.unsplash.com/photo-1574071318508-1cdbab80d002?w=500&q=80" },
-            { name: "Tandoori Chicken Pizza", price: "₹535", desc: "Wood-fired pizza topped with spicy chicken tikka chunks.", category: "Pizza & Pasta", img: "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=500&q=80" },
-            { name: "Cheesy Alfredo Pasta", price: "₹450", desc: "Penne tossed in a rich, creamy white sauce with garlic bread.", category: "Pizza & Pasta", img: "https://images.unsplash.com/photo-1645112411341-6c4fd023714a?w=500&q=80" },
-            
-            { name: "Mushroom Masala", price: "₹465.75", desc: "Mushrooms cooked in a thick spicy onion-tomato gravy.", category: "Main Course", img: "https://images.unsplash.com/photo-1585937421612-70a008356fbe?w=500&q=80" },
-            { name: "Grilled Fish Lemon Butter", price: "₹530", desc: "Pan-seared fish served with a tangy lemon butter sauce.", category: "Main Course", img: "https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?w=500&q=80" },
-            
-            { name: "Iced Latte", price: "₹362.25", desc: "Smooth blend of espresso and chilled milk over ice.", category: "Beverages", img: "https://images.unsplash.com/photo-1461023058943-07fcbe16d735?w=500&q=80" },
-            { name: "Virgin Mojito", price: "₹240", desc: "Refreshing mint, lime, and soda cooler.", category: "Beverages", img: "https://images.unsplash.com/photo-1551538827-9c037cb4f32a?w=500&q=80" }
+            // RICE & NOODLES
+            { name: "Asian Schezwan Fried Rice", price: "₹235", desc: "Vibrant, spicy, tasty and popular indo-chinese recipe of stir-fried vegetables.", category: "Rice & Noodles", img: "https://images.unsplash.com/photo-1603133872878-684f208fb84b?w=500&q=80" },
+            { name: "Pad Thai Noodles", price: "₹250", desc: "Thai flat rice noodle stir fry with a sweet-savoury-sour sauce scattered with peanuts.", category: "Rice & Noodles", img: "https://images.unsplash.com/photo-1585032226651-759b368d7246?w=500&q=80" },
+            { name: "Hakka Noodles", price: "₹250", desc: "Indian chinese dish made by stir frying hakka noodles with veggies, sauces and garlic.", category: "Rice & Noodles", img: "https://images.unsplash.com/photo-1552611052-33e04de081de?w=500&q=80" },
+
+            // BAR & BEVERAGES
+            { name: "Classic L.I.I.T", price: "₹690", desc: "Vodka, gin, tequila, white rum, triple sec, coke.", category: "Bar & Beverages", img: "https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?w=500&q=80" },
+            { name: "Bull Frog", price: "₹790", desc: "Vodka, gin, tequila, white rum, triple sec, blue curacao, red bull.", category: "Bar & Beverages", img: "https://images.unsplash.com/photo-1556679343-c7306c1976bc?w=500&q=80" },
+            { name: "Kamikaze Shot", price: "₹295", desc: "Vodka, triple sec, lime juice.", category: "Bar & Beverages", img: "https://images.unsplash.com/photo-1575037614876-c3858d44a69e?w=500&q=80" },
+            { name: "Iced Latte", price: "₹362", desc: "Smooth blend of espresso and chilled milk over ice.", category: "Bar & Beverages", img: "https://images.unsplash.com/photo-1461023058943-07fcbe16d735?w=500&q=80" }
         ];
 
         function renderMenu(categoryToMatch) {
