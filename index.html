@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ZOCA Dine & Bar | Smart Food Matcher</title>
+    <title>ZOCA Dine & Bar | Premium Lounge in Ranchi</title>
     <style>
         :root {
             --primary-green: #4A602B;
@@ -24,86 +24,119 @@
         body {
             background-color: var(--bg-cream);
             color: var(--text-dark);
+            line-height: 1.6;
         }
 
-        /* Header / Navbar */
-        header {
+        /* Navigation */
+        nav {
             background-color: var(--primary-green);
-            padding: 15px 20px;
+            padding: 15px 5%;
             display: flex;
             justify-content: space-between;
             align-items: center;
             color: var(--white);
+            position: sticky;
+            top: 0;
+            z-index: 100;
         }
 
-        header h1 {
+        nav h1 {
             font-size: 24px;
-            letter-spacing: 1px;
+            letter-spacing: 2px;
         }
 
         .btn-outline {
             background: var(--white);
             color: var(--primary-green);
             border: none;
-            padding: 8px 16px;
+            padding: 8px 20px;
             border-radius: 20px;
             font-weight: bold;
             cursor: pointer;
+            text-decoration: none;
         }
 
-        /* Main Container */
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 40px 20px;
-        }
-
-        .hero-text {
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(74, 96, 43, 0.8), rgba(74, 96, 43, 0.9)), url('https://images.unsplash.com/photo-1514933651103-005eec06c04b?auto=format&fit=crop&w=1200&q=80') center/cover;
+            color: var(--white);
             text-align: center;
+            padding: 100px 20px;
+        }
+
+        .hero h2 {
+            font-size: 3rem;
+            margin-bottom: 15px;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .btn-solid {
+            background: var(--white);
+            color: var(--text-dark);
+            padding: 12px 30px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+
+        /* Section Container */
+        .section {
+            padding: 60px 5%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 40px;
+            color: var(--primary-green);
+        }
+
+        /* Features Grid */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
             margin-bottom: 40px;
         }
 
-        /* Card Styles */
-        .card {
+        .feature-card {
+            background: var(--white);
+            padding: 30px 20px;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            border-top: 4px solid var(--primary-green);
+        }
+
+        .feature-card h3 {
+            margin-bottom: 10px;
+            color: var(--primary-green);
+        }
+
+        /* Smart Matcher Styles */
+        .matcher-card {
             background: var(--white);
             border-radius: 12px;
-            padding: 24px;
+            padding: 30px;
             margin-bottom: 20px;
             box-shadow: 0 4px 6px rgba(0,0,0,0.05);
         }
 
-        .step-header {
-            display: flex;
-            align-items: center;
-            margin-bottom: 15px;
-            font-size: 18px;
-            font-weight: bold;
-        }
-
-        .step-num {
-            background-color: var(--primary-green);
-            color: var(--white);
-            width: 24px;
-            height: 24px;
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 14px;
-            margin-right: 10px;
-        }
-
-        .instruction {
-            font-size: 14px;
-            color: #666;
-            margin-bottom: 15px;
-        }
-
-        /* Pills / Buttons */
         .pill-group {
             display: flex;
             flex-wrap: wrap;
             gap: 10px;
+            margin-bottom: 20px;
         }
 
         .pill {
@@ -114,7 +147,6 @@
             border-radius: 20px;
             cursor: pointer;
             transition: all 0.2s;
-            font-size: 14px;
         }
 
         .pill.active {
@@ -124,7 +156,6 @@
         }
 
         .action-btns {
-            margin-top: 20px;
             display: flex;
             gap: 10px;
         }
@@ -140,11 +171,8 @@
             pointer-events: none;
         }
 
-        .btn-primary.ready {
-            opacity: 1;
-            pointer-events: auto;
-        }
-
+        .btn-primary.ready { opacity: 1; pointer-events: auto; }
+        
         .btn-secondary {
             background-color: var(--white);
             color: var(--text-dark);
@@ -154,10 +182,7 @@
             cursor: pointer;
         }
 
-        /* Result Section */
-        #result-section {
-            display: none; /* Hidden until matched */
-        }
+        #result-section { display: none; }
 
         .result-image {
             width: 100%;
@@ -165,46 +190,149 @@
             object-fit: cover;
             border-radius: 8px;
             margin-bottom: 15px;
-            background-color: #eee;
         }
 
-        .dish-title {
-            font-size: 24px;
+        /* Full Menu Grid */
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .menu-item {
+            background: var(--white);
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            display: flex;
+            gap: 15px;
+        }
+
+        .menu-item img {
+            width: 80px;
+            height: 80px;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+
+        .menu-details h4 {
+            font-size: 1.1rem;
             margin-bottom: 5px;
         }
 
-        .dish-price {
-            font-size: 18px;
-            font-weight: bold;
+        .menu-details .price {
             color: var(--primary-green);
-            margin-bottom: 10px;
+            font-weight: bold;
+            margin-bottom: 5px;
         }
-        
-        .dish-desc {
-            font-size: 14px;
-            color: #555;
-            margin-bottom: 15px;
+
+        .menu-details .desc {
+            font-size: 0.85rem;
+            color: #666;
+        }
+
+        /* Booking Form */
+        .booking-container {
+            background: var(--white);
+            padding: 40px;
+            border-radius: 12px;
+            max-width: 600px;
+            margin: 0 auto;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid var(--gray-light);
+            border-radius: 8px;
+            font-size: 1rem;
+        }
+
+        .submit-btn {
+            background: var(--primary-green);
+            color: var(--white);
+            border: none;
+            padding: 15px;
+            width: 100%;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        #booking-success {
+            display: none;
+            background: #d4edda;
+            color: #155724;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--text-dark);
+            color: var(--white);
+            text-align: center;
+            padding: 30px 20px;
         }
     </style>
 </head>
 <body>
 
-    <header>
+    <!-- Navigation -->
+    <nav>
         <h1>ZOCA</h1>
-        <button class="btn-outline">Try Smart Food Matcher</button>
+        <a href="#book-table" class="btn-outline">Book a Table</a>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="hero">
+        <h2>The ZOCA Way.</h2>
+        <p>Premium dining, signature mocktails, and an unforgettable lounge experience in the heart of Lalpur, Ranchi.</p>
+        <a href="#menu" class="btn-solid">View Our Menu</a>
     </header>
 
-    <div class="container">
-        <div class="hero-text">
-            <h2>Find Your Perfect Dish</h2>
-            <p>Pick one taste and one meal window. We'll suggest a single dish from ZOCA's premium menu.</p>
-        </div>
-
-        <!-- Step 1: Taste -->
-        <div class="card">
-            <div class="step-header">
-                <div class="step-num">1</div> Pick a taste
+    <!-- Feature Cards -->
+    <section class="section">
+        <div class="features-grid">
+            <div class="feature-card">
+                <h3>Premium Lounge</h3>
+                <p>Aesthetic, photogenic spaces perfect for gatherings on East Jail Road.</p>
             </div>
+            <div class="feature-card">
+                <h3>Multi-Cuisine</h3>
+                <p>Exquisite Italian, Continental, Asian & North Indian fusion.</p>
+            </div>
+            <div class="feature-card">
+                <h3>Signature Drinks</h3>
+                <p>Expertly crafted mocktails, lattes, and refreshing beverages.</p>
+            </div>
+            <div class="feature-card">
+                <h3>Direct Reservations</h3>
+                <p>Skip the aggregator queues and book your VIP table directly with us.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Smart Food Matcher -->
+    <section class="section" style="background-color: #f0eee4; border-radius: 20px;">
+        <h2 class="section-title">Smart Food Matcher</h2>
+        
+        <div class="matcher-card">
+            <h3>1. Pick a Taste</h3>
             <div class="pill-group" id="taste-group">
                 <button class="pill" data-type="taste" data-val="Spicy">Spicy</button>
                 <button class="pill" data-type="taste" data-val="Mild">Mild</button>
@@ -215,136 +343,207 @@
             </div>
         </div>
 
-        <!-- Step 2: Meal Window -->
-        <div class="card">
-            <div class="step-header">
-                <div class="step-num">2</div> Pick a meal window
-            </div>
-            <p class="instruction">We'll match this to mains, sides or beverages that make sense at this time.</p>
+        <div class="matcher-card">
+            <h3>2. Pick a Meal Window</h3>
             <div class="pill-group" id="window-group">
                 <button class="pill" data-type="window" data-val="Lunch">Lunch</button>
                 <button class="pill" data-type="window" data-val="Snack">Snack</button>
                 <button class="pill" data-type="window" data-val="Dinner">Dinner</button>
                 <button class="pill" data-type="window" data-val="Anytime">Anytime</button>
             </div>
-
             <div class="action-btns">
                 <button class="btn-primary" id="find-btn">Find My Dish</button>
                 <button class="btn-secondary" id="reset-btn">Start Over</button>
             </div>
         </div>
 
-        <!-- Result Card -->
-        <div class="card" id="result-section">
-            <p style="font-size: 12px; color: var(--primary-green); font-weight: bold; letter-spacing: 1px;">SUGGESTED DISH</p>
-            <!-- You can replace the src here with a local file later, e.g., src="images/dish1.jpg" -->
+        <div class="matcher-card" id="result-section">
+            <p style="color: var(--primary-green); font-weight: bold; letter-spacing: 1px;">SUGGESTED DISH</p>
             <img id="result-img" class="result-image" src="" alt="Suggested Dish">
-            <h3 class="dish-title" id="result-title">Dish Name</h3>
-            <div class="dish-price" id="result-price">₹0</div>
-            <p class="dish-desc" id="result-desc">Description goes here.</p>
-            <div class="pill-group">
-                <span class="pill" style="font-size: 12px; padding: 4px 8px;" id="tag-taste">Taste</span>
-                <span class="pill" style="font-size: 12px; padding: 4px 8px;" id="tag-window">Window</span>
-            </div>
+            <h3 id="result-title" style="font-size: 24px;">Dish Name</h3>
+            <div id="result-price" style="font-size: 18px; color: var(--primary-green); font-weight: bold;">₹0</div>
+            <p id="result-desc" style="color: #555; margin-top: 10px;">Description</p>
         </div>
-    </div>
+    </section>
+
+    <!-- Full Menu Section -->
+    <section id="menu" class="section">
+        <h2 class="section-title">Our Full Menu</h2>
+        
+        <!-- Category Filter Pills -->
+        <div class="pill-group" style="justify-content: center; margin-bottom: 30px;" id="menu-filters">
+            <button class="pill active" onclick="filterMenu('All')">All</button>
+            <button class="pill" onclick="filterMenu('Starters')">Starters</button>
+            <button class="pill" onclick="filterMenu('Main Course')">Main Course</button>
+            <button class="pill" onclick="filterMenu('Beverages')">Beverages</button>
+        </div>
+
+        <!-- Menu Grid -->
+        <div class="menu-grid" id="menu-container">
+            <!-- Menu items will be injected here by JavaScript -->
+        </div>
+    </section>
+
+    <!-- Book a Table Section -->
+    <section id="book-table" class="section" style="background-color: #f0eee4; border-radius: 20px; margin-bottom: 60px;">
+        <h2 class="section-title">Reserve a Table</h2>
+        <div class="booking-container">
+            <form id="reservation-form">
+                <div class="form-group">
+                    <label>Full Name</label>
+                    <input type="text" required placeholder="John Doe">
+                </div>
+                <div class="form-group">
+                    <label>Phone Number</label>
+                    <input type="tel" required placeholder="+91">
+                </div>
+                <div style="display: flex; gap: 20px;">
+                    <div class="form-group" style="flex: 1;">
+                        <label>Date</label>
+                        <input type="date" required>
+                    </div>
+                    <div class="form-group" style="flex: 1;">
+                        <label>Time</label>
+                        <input type="time" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Number of Guests</label>
+                    <select>
+                        <option>2 People</option>
+                        <option>3 People</option>
+                        <option>4 People</option>
+                        <option>5+ People (Party)</option>
+                    </select>
+                </div>
+                <button type="submit" class="submit-btn">Confirm Reservation</button>
+                <div id="booking-success">Your table request has been received! Our team will contact you shortly to confirm.</div>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <h2>ZOCA Dine & Bar</h2>
+        <p>1st Floor, Eastern Heights, East Jail Road, Lalpur, Ranchi</p>
+        <p>Call us: 7260085444 | 7260083444</p>
+        <p style="margin-top: 20px; font-size: 12px; color: #888;">Demo built for presentation purposes.</p>
+    </footer>
 
     <script>
+        /* -----------------------------------------
+           1. SMART FOOD MATCHER LOGIC
+        ----------------------------------------- */
         let selectedTaste = null;
         let selectedWindow = null;
 
-        // The ZOCA Menu Data
-        const menuData = {
-            "Tangy_Anytime": {
-                name: "Mezze Platter",
-                price: "₹621",
-                desc: "A delightful assortment of Middle Eastern dips like hummus and baba ghanoush, served with pita bread and falafel.",
-                img: "https://placehold.co/600x400/4A602B/FFFFFF?text=Mezze+Platter"
-            },
-            "Spicy_Dinner": {
-                name: "Chilli Chicken",
-                price: "₹500",
-                desc: "Fiery and tangy chicken stir-fried with green chilies and bell peppers. A ZOCA favorite.",
-                img: "https://placehold.co/600x400/4A602B/FFFFFF?text=Chilli+Chicken"
-            },
-            "Creamy_Lunch": {
-                name: "Butter Garlic Mushroom",
-                price: "₹460",
-                desc: "Juicy mushrooms sautéed in a rich, creamy garlic butter sauce.",
-                img: "https://placehold.co/600x400/4A602B/FFFFFF?text=Butter+Garlic+Mushroom"
-            },
-            "Refreshing_Snack": {
-                name: "Iced Latte",
-                price: "₹362",
-                desc: "A smooth blend of espresso and chilled milk, lightly sweetened. Perfect for a quick recharge.",
-                img: "https://placehold.co/600x400/4A602B/FFFFFF?text=Iced+Latte"
-            },
-            "default": {
-                name: "Chef's Signature Platter",
-                price: "₹550",
-                desc: "Our chef's hand-picked selection of premium lounge appetizers.",
-                img: "https://placehold.co/600x400/4A602B/FFFFFF?text=Chef's+Signature+Platter"
-            }
+        const matcherData = {
+            "Tangy_Anytime": { name: "Mezze Platter", price: "₹621", desc: "Assortment of Middle Eastern dips with pita bread.", img: "https://placehold.co/600x400/4A602B/FFFFFF?text=Mezze+Platter" },
+            "Spicy_Dinner": { name: "Chilli Chicken", price: "₹500", desc: "Fiery and tangy chicken stir-fried with green chilies.", img: "https://placehold.co/600x400/4A602B/FFFFFF?text=Chilli+Chicken" },
+            "Creamy_Lunch": { name: "Butter Garlic Mushroom", price: "₹460", desc: "Juicy mushrooms sautéed in a rich garlic butter sauce.", img: "https://placehold.co/600x400/4A602B/FFFFFF?text=Butter+Garlic+Mushroom" },
+            "Refreshing_Snack": { name: "Iced Latte", price: "₹362", desc: "A smooth blend of espresso and chilled milk.", img: "https://placehold.co/600x400/4A602B/FFFFFF?text=Iced+Latte" },
+            "Spicy_Snack": { name: "Chicken 65", price: "₹529", desc: "Bite-sized pieces of chicken marinated and deep-fried.", img: "https://placehold.co/600x400/4A602B/FFFFFF?text=Chicken+65" },
+            "default": { name: "Chef's Signature Platter", price: "₹550", desc: "Our chef's hand-picked selection of premium appetizers.", img: "https://placehold.co/600x400/4A602B/FFFFFF?text=Signature+Platter" }
         };
 
-        const pills = document.querySelectorAll('.pill[data-val]');
-        const findBtn = document.getElementById('find-btn');
-        const resetBtn = document.getElementById('reset-btn');
-        const resultSection = document.getElementById('result-section');
-
-        // Handle clicking the taste/window pills
-        pills.forEach(pill => {
+        document.querySelectorAll('#taste-group .pill, #window-group .pill').forEach(pill => {
             pill.addEventListener('click', function() {
                 const type = this.getAttribute('data-type');
-                
-                // Remove active class from all peers
                 document.querySelectorAll(`.pill[data-type="${type}"]`).forEach(p => p.classList.remove('active'));
-                
-                // Add active class to clicked
                 this.classList.add('active');
 
-                // Save selection
                 if(type === 'taste') selectedTaste = this.getAttribute('data-val');
                 if(type === 'window') selectedWindow = this.getAttribute('data-val');
 
-                // Enable button if both are selected
                 if(selectedTaste && selectedWindow) {
-                    findBtn.classList.add('ready');
+                    document.getElementById('find-btn').classList.add('ready');
                 }
             });
         });
 
-        // Handle the Find My Dish button
-        findBtn.addEventListener('click', function() {
+        document.getElementById('find-btn').addEventListener('click', function() {
             if(!selectedTaste || !selectedWindow) return;
-
             const key = `${selectedTaste}_${selectedWindow}`;
-            const dish = menuData[key] || menuData["default"];
+            const dish = matcherData[key] || matcherData["default"];
 
-            // Update DOM
             document.getElementById('result-title').innerText = dish.name;
             document.getElementById('result-price').innerText = dish.price;
             document.getElementById('result-desc').innerText = dish.desc;
             document.getElementById('result-img').src = dish.img;
             
-            document.getElementById('tag-taste').innerText = selectedTaste.toLowerCase();
-            document.getElementById('tag-window').innerText = selectedWindow.toLowerCase();
-
-            // Show result
-            resultSection.style.display = 'block';
-            
-            // Scroll to result smoothly
-            resultSection.scrollIntoView({ behavior: 'smooth' });
+            document.getElementById('result-section').style.display = 'block';
         });
 
-        // Handle Reset
-        resetBtn.addEventListener('click', function() {
-            selectedTaste = null;
-            selectedWindow = null;
+        document.getElementById('reset-btn').addEventListener('click', function() {
+            selectedTaste = selectedWindow = null;
+            document.querySelectorAll('#taste-group .pill, #window-group .pill').forEach(p => p.classList.remove('active'));
+            document.getElementById('find-btn').classList.remove('ready');
+            document.getElementById('result-section').style.display = 'none';
+        });
+
+        /* -----------------------------------------
+           2. FULL MENU GENERATOR LOGIC
+        ----------------------------------------- */
+        const fullMenuData = [
+            { name: "Mezze Platter", price: "₹621", desc: "Assortment of Middle Eastern dips, served with pita bread.", category: "Starters", img: "https://placehold.co/100/4A602B/FFFFFF?text=Mezze" },
+            { name: "Butter Garlic Prawn", price: "₹707.25", desc: "Juicy prawns cooked in a rich butter garlic sauce.", category: "Starters", img: "https://placehold.co/100/4A602B/FFFFFF?text=Prawn" },
+            { name: "Chicken 65", price: "₹529", desc: "Bite-sized chicken marinated and deep-fried.", category: "Starters", img: "https://placehold.co/100/4A602B/FFFFFF?text=Chik+65" },
+            { name: "Vegetable Manchurian", price: "₹448.50", desc: "Crispy vegetable balls in flavorful Manchurian sauce.", category: "Starters", img: "https://placehold.co/100/4A602B/FFFFFF?text=Manchu" },
+            { name: "Mushroom Masala", price: "₹465.75", desc: "Mushrooms cooked in a thick spicy onion-tomato gravy.", category: "Main Course", img: "https://placehold.co/100/4A602B/FFFFFF?text=Mushroom" },
+            { name: "Classic Margherita Pizza", price: "₹460", desc: "10-inch classic cheese and tomato pizza.", category: "Main Course", img: "https://placehold.co/100/4A602B/FFFFFF?text=Pizza" },
+            { name: "Iced Latte", price: "₹362.25", desc: "Smooth blend of espresso and chilled milk.", category: "Beverages", img: "https://placehold.co/100/4A602B/FFFFFF?text=Latte" },
+            { name: "Virgin Mojito", price: "₹240", desc: "Refreshing mint and lime cooler.", category: "Beverages", img: "https://placehold.co/100/4A602B/FFFFFF?text=Mojito" }
+        ];
+
+        function renderMenu(categoryToMatch) {
+            const container = document.getElementById('menu-container');
+            container.innerHTML = ''; // Clear current items
+
+            fullMenuData.forEach(item => {
+                if (categoryToMatch === 'All' || item.category === categoryToMatch) {
+                    const html = `
+                        <div class="menu-item">
+                            <img src="${item.img}" alt="${item.name}">
+                            <div class="menu-details">
+                                <h4>${item.name}</h4>
+                                <div class="price">${item.price}</div>
+                                <div class="desc">${item.desc}</div>
+                            </div>
+                        </div>
+                    `;
+                    container.innerHTML += html;
+                }
+            });
+        }
+
+        function filterMenu(category) {
+            // Update active state on filter pills
+            const filters = document.getElementById('menu-filters').children;
+            for(let i=0; i<filters.length; i++) {
+                filters[i].classList.remove('active');
+                if(filters[i].innerText === category) {
+                    filters[i].classList.add('active');
+                }
+            }
+            // Re-render menu
+            renderMenu(category);
+        }
+
+        // Render "All" items on page load
+        renderMenu('All');
+
+        /* -----------------------------------------
+           3. RESERVATION FORM LOGIC
+        ----------------------------------------- */
+        document.getElementById('reservation-form').addEventListener('submit', function(e) {
+            e.preventDefault(); // Stop page from refreshing
+            document.getElementById('booking-success').style.display = 'block';
+            this.reset(); // Clear the form fields
             
-            pills.forEach(p => p.classList.remove('active'));
-            findBtn.classList.remove('ready');
-            resultSection.style.display = 'none';
+            // Hide the success message after 5 seconds
+            setTimeout(() => {
+                document.getElementById('booking-success').style.display = 'none';
+            }, 5000);
         });
     </script>
 </body>
