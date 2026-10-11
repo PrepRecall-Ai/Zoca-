@@ -438,13 +438,16 @@
         let selectedTaste = null;
         let selectedWindow = null;
 
-        const matcherData = {
-            "Tangy_Anytime": { name: "Mezze Platter", price: "₹621", desc: "Assortment of Middle Eastern dips with pita bread.", img: "https://placehold.co/600x400/4A602B/FFFFFF?text=Mezze+Platter" },
-            "Spicy_Dinner": { name: "Chilli Chicken", price: "₹500", desc: "Fiery and tangy chicken stir-fried with green chilies.", img: "https://placehold.co/600x400/4A602B/FFFFFF?text=Chilli+Chicken" },
-            "Creamy_Lunch": { name: "Butter Garlic Mushroom", price: "₹460", desc: "Juicy mushrooms sautéed in a rich garlic butter sauce.", img: "https://placehold.co/600x400/4A602B/FFFFFF?text=Butter+Garlic+Mushroom" },
-            "Refreshing_Snack": { name: "Iced Latte", price: "₹362", desc: "A smooth blend of espresso and chilled milk.", img: "https://placehold.co/600x400/4A602B/FFFFFF?text=Iced+Latte" },
-            "Spicy_Snack": { name: "Chicken 65", price: "₹529", desc: "Bite-sized pieces of chicken marinated and deep-fried.", img: "https://placehold.co/600x400/4A602B/FFFFFF?text=Chicken+65" },
-            "default": { name: "Chef's Signature Platter", price: "₹550", desc: "Our chef's hand-picked selection of premium appetizers.", img: "https://placehold.co/600x400/4A602B/FFFFFF?text=Signature+Platter" }
+       const matcherData = {
+            "Tangy_Anytime": { name: "Mezze Platter", price: "₹621", desc: "Assortment of Middle Eastern dips with pita bread.", img: "https://images.unsplash.com/photo-1541529086526-db283c563270?w=500&q=80" },
+            "Spicy_Dinner": { name: "Chilli Chicken", price: "₹500", desc: "Fiery and tangy chicken stir-fried with green chilies.", img: "https://images.unsplash.com/photo-1599487405270-8950f1f1d13f?w=500&q=80" },
+            "Spicy_Anytime": { name: "Chicken 65", price: "₹529", desc: "Bite-sized pieces of chicken marinated and deep-fried.", img: "https://images.unsplash.com/photo-1562967914-608f82629710?w=500&q=80" },
+            "Creamy_Lunch": { name: "Butter Garlic Mushroom", price: "₹460", desc: "Juicy mushrooms sautéed in a rich garlic butter sauce.", img: "https://images.unsplash.com/photo-1585937421612-70a008356fbe?w=500&q=80" },
+            "Creamy_Anytime": { name: "Cheesy Alfredo Pasta", price: "₹450", desc: "Penne tossed in a rich, creamy white sauce.", img: "https://images.unsplash.com/photo-1645112411341-6c4fd023714a?w=500&q=80" },
+            "Refreshing_Anytime": { name: "Iced Latte", price: "₹362", desc: "A smooth blend of espresso and chilled milk.", img: "https://images.unsplash.com/photo-1461023058943-07fcbe16d735?w=500&q=80" },
+            "Crunchy_Anytime": { name: "Steamed Momos", price: "₹285", desc: "Freshly steamed dumplings served with fiery chili garlic dip.", img: "https://images.unsplash.com/photo-1496116218417-1a781b1c416c?w=500&q=80" },
+            "Mild_Anytime": { name: "Classic Margherita Pizza", price: "₹460", desc: "10-inch classic cheese and tomato pizza.", img: "https://images.unsplash.com/photo-1574071318508-1cdbab80d002?w=500&q=80" },
+            "default": { name: "Chef's Signature Platter", price: "₹550", desc: "Our chef's hand-picked selection of premium appetizers.", img: "https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=500&q=80" }
         };
 
         document.querySelectorAll('#taste-group .pill, #window-group .pill').forEach(pill => {
@@ -464,8 +467,22 @@
 
         document.getElementById('find-btn').addEventListener('click', function() {
             if(!selectedTaste || !selectedWindow) return;
-            const key = `${selectedTaste}_${selectedWindow}`;
-            const dish = matcherData[key] || matcherData["default"];
+            
+            // 1. Try to find the exact combination (e.g. Spicy + Dinner)
+            let key = `${selectedTaste}_${selectedWindow}`;
+            let dish = matcherData[key];
+            
+            // 2. SMART FALLBACK: If exact match fails, try to match JUST the taste
+            if (!dish) {
+                dish = matcherData[`${selectedTaste}_Anytime`] || 
+                       matcherData[`${selectedTaste}_Lunch`] || 
+                       matcherData[`${selectedTaste}_Dinner`];
+            }
+            
+            // 3. If it STILL fails, use the default platter (which now has a working photo)
+            if (!dish) {
+                dish = matcherData["default"];
+            }
 
             document.getElementById('result-title').innerText = dish.name;
             document.getElementById('result-price').innerText = dish.price;
@@ -474,14 +491,7 @@
             
             document.getElementById('result-section').style.display = 'block';
         });
-
-        document.getElementById('reset-btn').addEventListener('click', function() {
-            selectedTaste = selectedWindow = null;
-            document.querySelectorAll('#taste-group .pill, #window-group .pill').forEach(p => p.classList.remove('active'));
-            document.getElementById('find-btn').classList.remove('ready');
-            document.getElementById('result-section').style.display = 'none';
-        });
-
+        
         /* -----------------------------------------
            2. FULL MENU GENERATOR LOGIC
         ----------------------------------------- */
