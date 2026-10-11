@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ZOCA Dine & Bar | Smart Food Matcher</title>
+    <style>
+        :root {
+            --primary-green: #4A602B;
+            --primary-light: #5A7236;
+            --bg-cream: #F9F8F3;
+            --text-dark: #2C3522;
+            --white: #FFFFFF;
+            --gray-light: #E0E0E0;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-cream);
+            color: var(--text-dark);
+        }
+
+        /* Header / Navbar */
+        header {
+            background-color: var(--primary-green);
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: var(--white);
+        }
+
+        header h1 {
+            font-size: 24px;
+            letter-spacing: 1px;
+        }
+
+        .btn-outline {
+            background: var(--white);
+            color: var(--primary-green);
+            border: none;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        /* Main Container */
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .hero-text {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        /* Card Styles */
+        .card {
+            background: var(--white);
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+
+        .step-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .step-num {
+            background-color: var(--primary-green);
+            color: var(--white);
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 14px;
+            margin-right: 10px;
+        }
+
+        .instruction {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 15px;
+        }
+
+        /* Pills / Buttons */
+        .pill-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .pill {
+            border: 1px solid var(--gray-light);
+            background: var(--white);
+            color: #555;
+            padding: 8px 16px;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-size: 14px;
+        }
+
+        .pill.active {
+            background-color: var(--primary-green);
+            color: var(--white);
+            border-color: var(--primary-green);
+        }
+
+        .action-btns {
+            margin-top: 20px;
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn-primary {
+            background-color: var(--primary-green);
+            color: var(--white);
+            border: none;
+            padding: 10px 20px;
+            border-radius: 20px;
+            cursor: pointer;
+            opacity: 0.5;
+            pointer-events: none;
+        }
+
+        .btn-primary.ready {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .btn-secondary {
+            background-color: var(--white);
+            color: var(--text-dark);
+            border: 1px solid var(--gray-light);
+            padding: 10px 20px;
+            border-radius: 20px;
+            cursor: pointer;
+        }
+
+        /* Result Section */
+        #result-section {
+            display: none; /* Hidden until matched */
+        }
+
+        .result-image {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            background-color: #eee;
+        }
+
+        .dish-title {
+            font-size: 24px;
+            margin-bottom: 5px;
+        }
+
+        .dish-price {
+            font-size: 18px;
+            font-weight: bold;
+            color: var(--primary-green);
+            margin-bottom: 10px;
+        }
+        
+        .dish-desc {
+            font-size: 14px;
+            color: #555;
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>ZOCA</h1>
+        <button class="btn-outline">Try Smart Food Matcher</button>
+    </header>
+
+    <div class="container">
+        <div class="hero-text">
+            <h2>Find Your Perfect Dish</h2>
+            <p>Pick one taste and one meal window. We'll suggest a single dish from ZOCA's premium menu.</p>
+        </div>
+
+        <!-- Step 1: Taste -->
+        <div class="card">
+            <div class="step-header">
+                <div class="step-num">1</div> Pick a taste
+            </div>
+            <div class="pill-group" id="taste-group">
+                <button class="pill" data-type="taste" data-val="Spicy">Spicy</button>
+                <button class="pill" data-type="taste" data-val="Mild">Mild</button>
+                <button class="pill" data-type="taste" data-val="Tangy">Tangy</button>
+                <button class="pill" data-type="taste" data-val="Creamy">Creamy</button>
+                <button class="pill" data-type="taste" data-val="Crunchy">Crunchy</button>
+                <button class="pill" data-type="taste" data-val="Refreshing">Refreshing</button>
+            </div>
+        </div>
+
+        <!-- Step 2: Meal Window -->
+        <div class="card">
+            <div class="step-header">
+                <div class="step-num">2</div> Pick a meal window
+            </div>
+            <p class="instruction">We'll match this to mains, sides or beverages that make sense at this time.</p>
+            <div class="pill-group" id="window-group">
+                <button class="pill" data-type="window" data-val="Lunch">Lunch</button>
+                <button class="pill" data-type="window" data-val="Snack">Snack</button>
+                <button class="pill" data-type="window" data-val="Dinner">Dinner</button>
+                <button class="pill" data-type="window" data-val="Anytime">Anytime</button>
+            </div>
+
+            <div class="action-btns">
+                <button class="btn-primary" id="find-btn">Find My Dish</button>
+                <button class="btn-secondary" id="reset-btn">Start Over</button>
+            </div>
+        </div>
+
+        <!-- Result Card -->
+        <div class="card" id="result-section">
+            <p style="font-size: 12px; color: var(--primary-green); font-weight: bold; letter-spacing: 1px;">SUGGESTED DISH</p>
+            <!-- You can replace the src here with a local file later, e.g., src="images/dish1.jpg" -->
+            <img id="result-img" class="result-image" src="" alt="Suggested Dish">
+            <h3 class="dish-title" id="result-title">Dish Name</h3>
+            <div class="dish-price" id="result-price">₹0</div>
+            <p class="dish-desc" id="result-desc">Description goes here.</p>
+            <div class="pill-group">
+                <span class="pill" style="font-size: 12px; padding: 4px 8px;" id="tag-taste">Taste</span>
+                <span class="pill" style="font-size: 12px; padding: 4px 8px;" id="tag-window">Window</span>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let selectedTaste = null;
+        let selectedWindow = null;
+
+        // The ZOCA Menu Data
+        const menuData = {
+            "Tangy_Anytime": {
+                name: "Mezze Platter",
+                price: "₹621",
+                desc: "A delightful assortment of Middle Eastern dips like hummus and baba ghanoush, served with pita bread and falafel.",
+                img: "https://placehold.co/600x400/4A602B/FFFFFF?text=Mezze+Platter"
+            },
+            "Spicy_Dinner": {
+                name: "Chilli Chicken",
+                price: "₹500",
+                desc: "Fiery and tangy chicken stir-fried with green chilies and bell peppers. A ZOCA favorite.",
+                img: "https://placehold.co/600x400/4A602B/FFFFFF?text=Chilli+Chicken"
+            },
+            "Creamy_Lunch": {
+                name: "Butter Garlic Mushroom",
+                price: "₹460",
+                desc: "Juicy mushrooms sautéed in a rich, creamy garlic butter sauce.",
+                img: "https://placehold.co/600x400/4A602B/FFFFFF?text=Butter+Garlic+Mushroom"
+            },
+            "Refreshing_Snack": {
+                name: "Iced Latte",
+                price: "₹362",
+                desc: "A smooth blend of espresso and chilled milk, lightly sweetened. Perfect for a quick recharge.",
+                img: "https://placehold.co/600x400/4A602B/FFFFFF?text=Iced+Latte"
+            },
+            "default": {
+                name: "Chef's Signature Platter",
+                price: "₹550",
+                desc: "Our chef's hand-picked selection of premium lounge appetizers.",
+                img: "https://placehold.co/600x400/4A602B/FFFFFF?text=Chef's+Signature+Platter"
+            }
+        };
+
+        const pills = document.querySelectorAll('.pill[data-val]');
+        const findBtn = document.getElementById('find-btn');
+        const resetBtn = document.getElementById('reset-btn');
+        const resultSection = document.getElementById('result-section');
+
+        // Handle clicking the taste/window pills
+        pills.forEach(pill => {
+            pill.addEventListener('click', function() {
+                const type = this.getAttribute('data-type');
+                
+                // Remove active class from all peers
+                document.querySelectorAll(`.pill[data-type="${type}"]`).forEach(p => p.classList.remove('active'));
+                
+                // Add active class to clicked
+                this.classList.add('active');
+
+                // Save selection
+                if(type === 'taste') selectedTaste = this.getAttribute('data-val');
+                if(type === 'window') selectedWindow = this.getAttribute('data-val');
+
+                // Enable button if both are selected
+                if(selectedTaste && selectedWindow) {
+                    findBtn.classList.add('ready');
+                }
+            });
+        });
+
+        // Handle the Find My Dish button
+        findBtn.addEventListener('click', function() {
+            if(!selectedTaste || !selectedWindow) return;
+
+            const key = `${selectedTaste}_${selectedWindow}`;
+            const dish = menuData[key] || menuData["default"];
+
+            // Update DOM
+            document.getElementById('result-title').innerText = dish.name;
+            document.getElementById('result-price').innerText = dish.price;
+            document.getElementById('result-desc').innerText = dish.desc;
+            document.getElementById('result-img').src = dish.img;
+            
+            document.getElementById('tag-taste').innerText = selectedTaste.toLowerCase();
+            document.getElementById('tag-window').innerText = selectedWindow.toLowerCase();
+
+            // Show result
+            resultSection.style.display = 'block';
+            
+            // Scroll to result smoothly
+            resultSection.scrollIntoView({ behavior: 'smooth' });
+        });
+
+        // Handle Reset
+        resetBtn.addEventListener('click', function() {
+            selectedTaste = null;
+            selectedWindow = null;
+            
+            pills.forEach(p => p.classList.remove('active'));
+            findBtn.classList.remove('ready');
+            resultSection.style.display = 'none';
+        });
+    </script>
+</body>
+</html>
