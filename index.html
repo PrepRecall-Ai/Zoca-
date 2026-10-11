@@ -374,6 +374,7 @@
         <div class="pill-group" style="justify-content: center; margin-bottom: 30px;" id="menu-filters">
             <button class="pill active" onclick="filterMenu('All')">All</button>
             <button class="pill" onclick="filterMenu('Starters')">Starters</button>
+            <button class="pill" onclick="filterMenu('Pizza & Pasta')">Pizza & Pasta</button>
             <button class="pill" onclick="filterMenu('Main Course')">Main Course</button>
             <button class="pill" onclick="filterMenu('Beverages')">Beverages</button>
         </div>
@@ -485,14 +486,20 @@
            2. FULL MENU GENERATOR LOGIC
         ----------------------------------------- */
         const fullMenuData = [
-            { name: "Mezze Platter", price: "₹621", desc: "Assortment of Middle Eastern dips, served with pita bread.", category: "Starters", img: "https://placehold.co/100/4A602B/FFFFFF?text=Mezze" },
-            { name: "Butter Garlic Prawn", price: "₹707.25", desc: "Juicy prawns cooked in a rich butter garlic sauce.", category: "Starters", img: "https://placehold.co/100/4A602B/FFFFFF?text=Prawn" },
-            { name: "Chicken 65", price: "₹529", desc: "Bite-sized chicken marinated and deep-fried.", category: "Starters", img: "https://placehold.co/100/4A602B/FFFFFF?text=Chik+65" },
-            { name: "Vegetable Manchurian", price: "₹448.50", desc: "Crispy vegetable balls in flavorful Manchurian sauce.", category: "Starters", img: "https://placehold.co/100/4A602B/FFFFFF?text=Manchu" },
-            { name: "Mushroom Masala", price: "₹465.75", desc: "Mushrooms cooked in a thick spicy onion-tomato gravy.", category: "Main Course", img: "https://placehold.co/100/4A602B/FFFFFF?text=Mushroom" },
-            { name: "Classic Margherita Pizza", price: "₹460", desc: "10-inch classic cheese and tomato pizza.", category: "Main Course", img: "https://placehold.co/100/4A602B/FFFFFF?text=Pizza" },
-            { name: "Iced Latte", price: "₹362.25", desc: "Smooth blend of espresso and chilled milk.", category: "Beverages", img: "https://placehold.co/100/4A602B/FFFFFF?text=Latte" },
-            { name: "Virgin Mojito", price: "₹240", desc: "Refreshing mint and lime cooler.", category: "Beverages", img: "https://placehold.co/100/4A602B/FFFFFF?text=Mojito" }
+            { name: "Mezze Platter", price: "₹621", desc: "Assortment of Middle Eastern dips, served with pita bread.", category: "Starters", img: "https://images.unsplash.com/photo-1541529086526-db283c563270?w=500&q=80" },
+            { name: "Butter Garlic Prawn", price: "₹707.25", desc: "Juicy prawns cooked in a rich butter garlic sauce.", category: "Starters", img: "https://images.unsplash.com/photo-1559742811-822873691df8?w=500&q=80" },
+            { name: "Chicken 65", price: "₹529", desc: "Bite-sized chicken marinated in spices and deep-fried.", category: "Starters", img: "https://images.unsplash.com/photo-1562967914-608f82629710?w=500&q=80" },
+            { name: "Steamed Momos", price: "₹285", desc: "Freshly steamed dumplings served with fiery chili garlic dip.", category: "Starters", img: "https://images.unsplash.com/photo-1496116218417-1a781b1c416c?w=500&q=80" },
+            
+            { name: "Classic Margherita Pizza", price: "₹460", desc: "10-inch classic cheese and tomato pizza.", category: "Pizza & Pasta", img: "https://images.unsplash.com/photo-1574071318508-1cdbab80d002?w=500&q=80" },
+            { name: "Tandoori Chicken Pizza", price: "₹535", desc: "Wood-fired pizza topped with spicy chicken tikka chunks.", category: "Pizza & Pasta", img: "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=500&q=80" },
+            { name: "Cheesy Alfredo Pasta", price: "₹450", desc: "Penne tossed in a rich, creamy white sauce with garlic bread.", category: "Pizza & Pasta", img: "https://images.unsplash.com/photo-1645112411341-6c4fd023714a?w=500&q=80" },
+            
+            { name: "Mushroom Masala", price: "₹465.75", desc: "Mushrooms cooked in a thick spicy onion-tomato gravy.", category: "Main Course", img: "https://images.unsplash.com/photo-1585937421612-70a008356fbe?w=500&q=80" },
+            { name: "Grilled Fish Lemon Butter", price: "₹530", desc: "Pan-seared fish served with a tangy lemon butter sauce.", category: "Main Course", img: "https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?w=500&q=80" },
+            
+            { name: "Iced Latte", price: "₹362.25", desc: "Smooth blend of espresso and chilled milk over ice.", category: "Beverages", img: "https://images.unsplash.com/photo-1461023058943-07fcbe16d735?w=500&q=80" },
+            { name: "Virgin Mojito", price: "₹240", desc: "Refreshing mint, lime, and soda cooler.", category: "Beverages", img: "https://images.unsplash.com/photo-1551538827-9c037cb4f32a?w=500&q=80" }
         ];
 
         function renderMenu(categoryToMatch) {
